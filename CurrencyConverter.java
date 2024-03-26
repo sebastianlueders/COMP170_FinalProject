@@ -4,6 +4,16 @@
 public class CurrencyConverter {
 
     public static void main(String[] args) {
-        System.out.println("test");
+        
+        refreshExchangeRate();
+        getAmount();
+        getBaseCurrency();
+        getExchangeCurrency();
+        mathConversion();
+        currencySymbolFinder();
+        feeEstimator();
+        
     }
+
+    
 }
