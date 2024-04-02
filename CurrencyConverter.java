@@ -1,5 +1,9 @@
 /**
- * Chess
+ * Currency Exchange Program
+ * 
+ * Pseudocode:
+ * 
+ * 1. 
  */
 public class CurrencyConverter {
 
