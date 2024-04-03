@@ -32,7 +32,7 @@ public class CurrencyConverter {
         
         updateExchangeRate();
         getBaseCurrency();
-        getExchangeCurrency();
+        getEndCurrency();
         getAmount();
         mathConversion();
         currencySymbolFinder();
