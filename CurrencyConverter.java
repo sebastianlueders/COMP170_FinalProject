@@ -1,3 +1,8 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.PrintStream;
+
+
 /**
  * Currency Exchange Program
  * 
@@ -11,6 +16,8 @@ public class CurrencyConverter {
         
         System.out.println("Welcome to the Quick Currency Conversion Tool");
         System.out.println();
+
+
 
         
         

@@ -1,0 +1,61 @@
+Euro 0.923175 2024-04-03
+British Pound 0.790565 2024-04-03
+Indian Rupee 83.486155 2024-04-03
+Australian Dollar 1.522764 2024-04-03
+Canadian Dollar 1.352698 2024-04-03
+Singapore Dollar 1.348248 2024-04-03
+Swiss Franc 0.903880 2024-04-03
+Malaysian Ringgit 4.753189 2024-04-03
+Japanese Yen 151.695070 2024-04-03
+Chinese Yuan Renminbi 7.233192 2024-04-03
+Argentine Peso 857.545968 2024-04-03
+Australian Dollar 1.522764 2024-04-03
+Bahraini Dinar 0.376000 2024-04-03
+Botswana Pula 13.687025 2024-04-03
+Brazilian Real 5.040568 2024-04-03
+Bruneian Dollar 1.348248 2024-04-03
+Bulgarian Lev 1.805573 2024-04-03
+Chilean Peso 954.969321 2024-04-03
+Colombian Peso 3811.948276 2024-04-03
+Czech Koruna 23.386852 2024-04-03
+Danish Krone 6.885930 2024-04-03
+Emirati Dirham 3.672500 2024-04-03
+Hong Kong Dollar 7.829227 2024-04-03
+Hungarian Forint 362.214681 2024-04-03
+Icelandic Krona 138.759958 2024-04-03
+Indian Rupee 83.486155 2024-04-03
+Indonesian Rupiah 15930.370023 2024-04-03
+Iranian Rial 42043.780754 2024-04-03
+Israeli Shekel 3.703585 2024-04-03
+Kazakhstani Tenge 446.941888 2024-04-03
+Kuwaiti Dinar 0.307579 2024-04-03
+Libyan Dinar 4.830200 2024-04-03
+Mauritian Rupee 46.318412 2024-04-03
+Mexican Peso 16.530794 2024-04-03
+Nepalese Rupee 133.640463 2024-04-03
+New Zealand Dollar 1.664605 2024-04-03
+Norwegian Krone 10.716926 2024-04-03
+Omani Rial 0.384701 2024-04-03
+Pakistani Rupee 277.976936 2024-04-03
+Philippine Peso 56.412516 2024-04-03
+Polish Zloty 3.960908 2024-04-03
+Qatari Riyal 3.640000 2024-04-03
+Romanian New Leu 4.587887 2024-04-03
+Russian Ruble 91.645316 2024-04-03
+Saudi Arabian Riyal 3.750000 2024-04-03
+South African Rand 18.655976 2024-04-03
+South Korean Won 1346.265575 2024-04-03
+Sri Lankan Rupee 299.496540 2024-04-03
+Swedish Krona 10.637024 2024-04-03
+Taiwan New Dollar 32.019608 2024-04-03
+Thai Baht 36.613867 2024-04-03
+Trinidadian Dollar 6.781588 2024-04-03
+Turkish Lira 31.941096 2024-04-03
+Venezuelan Bolivar 3622055.294712 2024-04-03
+
+
+
+
+
+
+
