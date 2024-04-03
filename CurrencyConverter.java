@@ -11,13 +11,13 @@ public class CurrencyConverter {
         
         System.out.println("Welcome to the Quick Currency Conversion Tool");
         System.out.println();
+
         
         
-        
-        refreshExchangeRate();
-        getAmount();
+        updateExchangeRate();
         getBaseCurrency();
         getExchangeCurrency();
+        getAmount();
         mathConversion();
         currencySymbolFinder();
         feeEstimator();
