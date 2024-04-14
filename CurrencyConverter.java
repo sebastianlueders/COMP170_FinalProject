@@ -32,7 +32,7 @@ public class CurrencyConverter {
     }
 
     // Updates the exchange rate with new exchange rate provided by the user
-    public static void updateExchangeRate(String currency) {
+    public static void updateExchangeRate(String currencySymbol, double updatedRate) {
 
     }
 
@@ -52,7 +52,7 @@ public class CurrencyConverter {
     }
 
     // If needed, finds and converts x/USD conversion rate to USD/x if user is converting into USD
-    public static double inverseConversion(String currency) {
+    public static double inverseConversion(String currencySymbol) {
 
     }
 
@@ -62,7 +62,7 @@ public class CurrencyConverter {
     }
 
     // Finds & returns the unicode value of the end currency for use in printing
-    public static char currencySymbolFinder(String currency) {
+    public static char currencySymbolFinder(String currencySymbol) {
 
     }
 
