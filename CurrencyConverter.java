@@ -8,9 +8,22 @@ public class CurrencyConverter {
 
     public static void main(String[] args) {
         
+        boolean done = false;
         
 
         welcome();
+
+        while (!done) {
+            int action = prompt();
+
+            if (action == -1) {
+                done = true;
+            } else {
+                // Insert program logic here with included methods below
+            }
+
+
+        }
 
         
         
@@ -29,6 +42,23 @@ public class CurrencyConverter {
     public static void welcome() {
         System.out.println("Welcome to the Quick Currency Conversion Tool");
         System.out.println();
+    }
+
+    // Prompt user to either make a currency conversion estimate or quit the program. Returns int value representing their answer.
+    public static int prompt() {
+        System.out.print("Enter 1 to get a conversion estimate or -1 to quit the app: ");
+
+        Scanner keyboard = new Scanner(System.in);
+        int command = 0;
+
+        while (!keyboard.hasNextInt() || command != -1 || command != 1) {
+            System.out.println("Invalid Command!");
+            System.out.print("Enter 1 to get a conversion estimate or -1 to quit the app: ");
+            keyboard.next();
+            command = keyboard.nextInt();
+        }
+
+        return command;
     }
 
     // Updates the exchange rate with new exchange rate provided by the user
