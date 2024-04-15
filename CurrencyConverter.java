@@ -21,10 +21,10 @@ public class CurrencyConverter {
             } else {
                 System.out.println();
                 String baseCurrency = getBaseCurrency();
-                char baseCurrencySymbol = currencySymbolFinder(baseCurrency);
+                String baseCurrencySymbol = currencySymbolFinder(baseCurrency);
                 System.out.println();
                 String endCurrency = getEndCurrency();
-                char endCurrencySymbol = currencySymbolFinder(endCurrency);
+                String endCurrencySymbol = currencySymbolFinder(endCurrency);
                 System.out.println();
                 double baseAmount = getAmount(baseCurrency, endCurrency);
                 System.out.println();
@@ -172,12 +172,87 @@ public class CurrencyConverter {
     }
 
     // Finds & returns the unicode value of the passed currency's symbol for use in printing
-    public static char currencySymbolFinder(String currencyISO) {
+    public static String currencySymbolFinder(String c) {
 
+        if (c == "AED") {
+            return "\u062F.\u0625";
+        } else if (c == "BGN") {
+            return "\u043B\u0432";
+        } else if (c == "BHD") {
+            return "\u062F";
+        } else if (c == "BRL") {
+            return "R$";
+        } else if (c == "BWP") {
+            return "P";
+        } else if (c == "CHF") {
+            return c;
+        } else if (c == "CZK") {
+            return "K\u010D";
+        } else if (c == "DKK") {
+            return "dk";
+        } else if (c == "EUR") {
+            return "\u20AC";
+        } else if (c == "GBP") {
+            return "\u00A3";
+        } else if (c == "HUF") {
+            return "Ft";
+        } else if (c == "IDR") {
+            return "Rp";
+        } else if (c == "ILS") {
+            return "\u20AA";
+        } else if (c == "INR") {
+            return "\u20B9";
+        } else if (c == "IRR") {
+            return "\uFDFC";
+        } else if (c == "ISK" || c == "NOK" || c == "SEK") {
+            return "kr";
+        } else if (c == "JPY" || c == "RMB") {
+            return "\u00A5";
+        } else if (c == "KRW") {
+            return "\u20A9";
+        } else if (c == "KWD") {
+            return "\u062F.\u0643";
+        } else if (c == "KZT") {
+            return "\u20B8";
+        } else if (c == "LKR" || c == "NPR" || c == "PKR") {
+            return "\u20A8";
+        } else if (c == "LYD") {
+            return "\u062F.\u0644";
+        } else if (c == "MUR") {
+            return "\u20B9";
+        } else if (c == "MYR") {
+            return "RM";
+        } else if (c == "OMR") {
+            return "\u0631.\u0639.";
+        } else if (c == "PHP") {
+            return "\u20B1";
+        } else if (c == "PLN") {
+            return "\u007A\u0142";
+        } else if (c == "QAR") {
+            return "\u0631";
+        } else if (c == "RON") {
+            return "lei";
+        } else if (c == "RUB") {
+            return "\u20BD";
+        } else if (c == "SAR") {
+            return "\u0631.\u0633";
+        } else if (c == "THB") {
+            return "\u0E3F";
+        } else if (c == "TRY") {
+            return "\u20BA";
+        } else if (c == "TWD") {
+            return "NT$";
+        } else if (c == "VED") {
+            return "Bs. S.";
+        } else if (c == "ZAR") {
+            return "R";
+        } else {
+            return "$";
+        }
     }
 
     // Using all of the variables needed, creates a print statement that summarizes the transaction quote & fair value (should state that fees are variable based on broker, would be good to get a range)
-    public static void printFinalResults(char baseSymbol, double baseAmount, String endCurrency, char endCurrencySymbol, double endCurrencyFairValue) {
+    public static void printFinalResults(String baseSymbol, double baseAmount, String endCurrency, String endCurrencySymbol, double endCurrencyFairValue) {
 
     }
 }
