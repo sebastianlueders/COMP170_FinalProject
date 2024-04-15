@@ -14,27 +14,80 @@ public class CurrencyConverter {
         welcome();
 
         while (!done) {
-            int action = prompt();
+            String action = promptForAction();
 
-            if (action == -1) {
+            if (action.equals("quit")) {
                 done = true;
             } else {
-                // Insert program logic here with included methods below
+                System.out.println();
+                String baseCurrency = getBaseCurrency();
+                char baseCurrencySymbol = currencySymbolFinder(baseCurrency);
+                System.out.println();
+                String endCurrency = getEndCurrency();
+                char endCurrencySymbol = currencySymbolFinder(endCurrency);
+                System.out.println();
+                double baseAmount = getAmount(baseCurrency, endCurrency);
+                System.out.println();
+
+
+                
+                
+
+
+                String exchangeType = exchangeType(baseCurrency, endCurrency);
+
+
+                double conversionValue;
+                double conversionValueToUSD;
+                double conversionValueFromUSD;
+                double finalConversionRate;
+                double endCurrencyFairValue;
+                boolean rateUpdated = false;
+
+
+                
+                if (exchangeType.equals("same")) {
+                    System.out.println("It looks like you're trying to convert to the same currency you already have! Please try again with two different currencies.");
+                    System.out.println();
+                    continue;
+                } else if (exchangeType.equals("to USD")) {
+                    conversionValue = mathConversionToUSD(baseCurrency);
+                    rateUpdated = promptForRateUpdate(baseCurrency, endCurrency, conversionValue);
+                    if (rateUpdated) {
+                        conversionValue = mathConversionToUSD(baseCurrency);
+                    }
+                    endCurrencyFairValue = baseAmount * finalConversionRate;
+
+                } else if (exchangeType.equals("from USD")) {
+                    conversionValue = mathConversionFromUSD(endCurrency);
+                    rateUpdated = promptForRateUpdate(baseCurrency, endCurrency, conversionValue);
+                    if (rateUpdated) {
+                        conversionValue = mathConversionFromUSD(baseCurrency);
+                    }
+                    endCurrencyFairValue = baseAmount * finalConversionRate;
+
+                } else {
+                    conversionValueToUSD = mathConversionToUSD(baseCurrency);
+                    conversionValueFromUSD = mathConversionFromUSD(endCurrency);
+                    finalConversionRate = conversionValueToUSD * conversionValueFromUSD;
+                    
+                    rateUpdated = promptForMultipleRateUpdate(baseCurrency, endCurrency, conversionValueToUSD, conversionValueFromUSD);
+                    if (rateUpdated) {
+                        conversionValueToUSD = mathConversionToUSD(baseCurrency);
+                        conversionValueFromUSD = mathConversionFromUSD(endCurrency);
+                        finalConversionRate = conversionValueToUSD * conversionValueFromUSD;
+                        
+                    }
+                    endCurrencyFairValue = baseAmount * finalConversionRate;
+
+                }
+
+                printFinalResults(baseCurrencySymbol, baseAmount, endCurrency, endCurrencySymbol, endCurrencyFairValue);
+
             }
 
 
         }
-
-        
-        
-        updateExchangeRate();
-        getBaseCurrency();
-        getEndCurrency();
-        getAmount();
-        inverseConversion();
-        finalConversionRate();
-        currencySymbolFinder();
-        feeEstimator();
         
     }
 
@@ -45,26 +98,22 @@ public class CurrencyConverter {
     }
 
     // Prompt user to either make a currency conversion estimate or quit the program. Returns int value representing their answer.
-    public static int prompt() {
-        System.out.print("Enter 1 to get a conversion estimate or -1 to quit the app: ");
+    public static String promptForAction() {
+        System.out.print("Enter 'convert' to get a conversion estimate or 'quit' to quit the app: ");
 
         Scanner keyboard = new Scanner(System.in);
-        int command = 0;
+        String command = keyboard.next();
 
-        while (!keyboard.hasNextInt() || command != -1 || command != 1) {
+        while (!command.equals("convert") && !command.equals("quit")) {
             System.out.println("Invalid Command!");
-            System.out.print("Enter 1 to get a conversion estimate or -1 to quit the app: ");
-            keyboard.next();
-            command = keyboard.nextInt();
+            System.out.print("Enter 'convert' to get a conversion estimate or 'quit' to quit the app: ");
+            command = keyboard.next();
         }
 
         return command;
     }
 
-    // Updates the exchange rate with new exchange rate provided by the user
-    public static void updateExchangeRate(String currencySymbol, double updatedRate) {
 
-    }
 
     // Prompts & returns the base currency that the user wants to use for their transaction quote
     public static String getBaseCurrency() {
@@ -77,27 +126,58 @@ public class CurrencyConverter {
     }
 
     // Prompts & returns the amount of base currency that the user wants to exchange
-    public static double getAmount() {
+    public static double getAmount(String base, String end) {
 
     }
 
-    // If needed, finds and converts x/USD conversion rate to USD/x if user is converting into USD
-    public static double inverseConversion(String currencySymbol) {
+    // Determines the type of exchange that needs to be calculated and returns one of the options as a string
+    public static String exchangeType(String currency1, String currency2) {
+        
+        if (currency1.equals(currency2)) {
+            return "same";
+        } else if (currency1.equals("USD") || currency2.equals("USD")) {
+            if (currency1.equals("USD")) {
+                return "from USD";
+            } else {
+                return "to USD";
+            }
+        } else {
+            return "multiple";
+        }
+    }
+
+    // Returns exchange rate when exchanging passed currency for USD
+    public static double mathConversionToUSD(String baseISO) {
 
     }
 
-    // Finds and returns the exchange rate for more complciated transactions i.e. through USD where neither base nor end currencies are USD
-    public static double finalConversionRate(String baseCurrency, String endCurrency) {
+    // Returns exchange rate when exchanging USD for passed currency
+    public static double mathConversionFromUSD(String endISO) {
 
     }
 
-    // Finds & returns the unicode value of the end currency for use in printing
-    public static char currencySymbolFinder(String currencySymbol) {
+    // Prompts user to verify that the current exchange rate is correct, then updates using updateExchangeRate if necessary. Returns whether update occurred.
+    public static boolean promptForRateUpdate(String base, String end, double currentConversionValue) {
 
     }
 
-    // Finds & returns estimated low & high range of fees for the transaction to provide user with range of acceptable quotes
-    public static String feeEstimator(int finalAmount) {
+    // Prompts user to verify that the current exchange rate for both transactions is correct, then updates using updateExchangeRate if necessary. Returns whether update occurred.
+    public static boolean promptForMultipleRateUpdate(String base, String end, double baseToUSDRate, double USDToEndRate) {
+
+    }
+
+    // Updates the exchange rate with new exchange rate provided by the user
+    public static void updateExchangeRate(String currencySymbol, double updatedRate) {
+
+    }
+
+    // Finds & returns the unicode value of the passed currency's symbol for use in printing
+    public static char currencySymbolFinder(String currencyISO) {
+
+    }
+
+    // Using all of the variables needed, creates a print statement that summarizes the transaction quote & fair value (should state that fees are variable based on broker, would be good to get a range)
+    public static void printFinalResults(char baseSymbol, double baseAmount, String endCurrency, char endCurrencySymbol, double endCurrencyFairValue) {
 
     }
 }
