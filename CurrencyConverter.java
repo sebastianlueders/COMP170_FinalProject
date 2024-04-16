@@ -287,7 +287,24 @@ public class CurrencyConverter {
     }
 
     // Returns exchange rate when exchanging USD for passed currency
-    public static double mathConversionFromUSD(String endISO) {
+    public static double mathConversionFromUSD(String endISO) throws FileNotFoundException {
+        int lineNumber = getLine(endISO);
+
+        Scanner exrates = new Scanner(new File("exrates.txt"));
+
+        for (int i = 1; i <= lineNumber; i++) {
+            exrates.nextLine();
+        }
+
+        String relevantLine = exrates.nextLine();
+
+        Scanner line = new Scanner(relevantLine);
+
+        line.next();
+
+        double conversionRate = line.nextDouble();
+
+        return conversionRate;
 
     }
 
