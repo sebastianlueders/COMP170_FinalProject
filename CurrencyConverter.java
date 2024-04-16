@@ -199,7 +199,30 @@ public class CurrencyConverter {
 
     // Prompts & returns the amount of base currency that the user wants to exchange
     public static double getAmount(String base, String end) {
+        boolean validInput = false;
+        double amount = 0;
 
+        while (!validInput) {
+        
+            System.out.print("How much " + base + " would you like to convert to " + end + " today? ");
+            Scanner keyboard = new Scanner(System.in);
+
+            while (!keyboard.hasNextDouble()) {
+                System.out.println("Please enter a numerical amount you'd like to exchange today: ");
+                keyboard.next();
+            }
+            
+            amount = keyboard.nextDouble();
+
+            if (amount <= 0) {
+                System.out.println("Sorry, we can't exchange this value. Please try again.")
+            } else {
+                validInput = true;
+            }
+
+        }
+
+        return amount;
     }
 
     // Determines the type of exchange that needs to be calculated and returns one of the options as a string
