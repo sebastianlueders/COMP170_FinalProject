@@ -241,9 +241,31 @@ public class CurrencyConverter {
         }
     }
 
+    // Returns line number of ISO passed
+    public static int getLine(String iso) throws FileNotFoundException {
+        Scanner exrates = new Scanner(new File("exrates.txt"));
+        boolean match = false;
+        String candidate;
+        int lineCounter = 0;
+
+        while (exrates.hasNextLine() && !match) {
+            
+            candidate = exrates.next();
+
+            if (iso.equals(end)) {
+                match = true;
+            } else {
+                exrates.nextLine();
+                lineCounter++;
+            }
+        }
+
+        return lineCounter;
+    }
+
     // Returns exchange rate when exchanging passed currency for USD
     public static double mathConversionToUSD(String baseISO) {
-
+        int lineNumber = getLine(baseISO);
     }
 
     // Returns exchange rate when exchanging USD for passed currency
