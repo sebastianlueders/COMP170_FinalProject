@@ -174,77 +174,77 @@ public class CurrencyConverter {
     // Finds & returns the unicode value of the passed currency's symbol for use in printing
     public static String currencySymbolFinder(String c) {
 
-        if (c == "AED") {
+        if (c.equals("AED")) {
             return "\u062F.\u0625";
-        } else if (c == "BGN") {
+        } else if (c.equals("BGN")) {
             return "\u043B\u0432";
-        } else if (c == "BHD") {
+        } else if (c.equals( "BHD")) {
             return "\u062F";
-        } else if (c == "BRL") {
+        } else if (c.equals("BRL")) {
             return "R$";
-        } else if (c == "BWP") {
+        } else if (c.equals("BWP")) {
             return "P";
-        } else if (c == "CHF") {
+        } else if (c.equals("CHF")) {
             return c;
-        } else if (c == "CZK") {
+        } else if (c.equals("CZK")) {
             return "K\u010D";
-        } else if (c == "DKK") {
+        } else if (c.equals("DKK")) {
             return "dk";
-        } else if (c == "EUR") {
+        } else if (c.equals("EUR")) {
             return "\u20AC";
-        } else if (c == "GBP") {
+        } else if (c.equals("GBP")) {
             return "\u00A3";
-        } else if (c == "HUF") {
+        } else if (c.equals("HUF")) {
             return "Ft";
-        } else if (c == "IDR") {
+        } else if (c.equals("IDR")) {
             return "Rp";
-        } else if (c == "ILS") {
+        } else if (c.equals("ILS")) {
             return "\u20AA";
-        } else if (c == "INR") {
+        } else if (c.equals("INR")) {
             return "\u20B9";
-        } else if (c == "IRR") {
+        } else if (c.equals("IRR")) {
             return "\uFDFC";
-        } else if (c == "ISK" || c == "NOK" || c == "SEK") {
+        } else if (c.equals("ISK") || c.equals("NOK") || c.equals("SEK")) {
             return "kr";
-        } else if (c == "JPY" || c == "RMB") {
+        } else if (c.equals("JPY") || c.equals("RMB")) {
             return "\u00A5";
-        } else if (c == "KRW") {
+        } else if (c.equals("KRW")) {
             return "\u20A9";
-        } else if (c == "KWD") {
+        } else if (c.equals("KWD")) {
             return "\u062F.\u0643";
-        } else if (c == "KZT") {
+        } else if (c.equals("KZT")) {
             return "\u20B8";
-        } else if (c == "LKR" || c == "NPR" || c == "PKR") {
+        } else if (c.equals("LKR") || c.equals("NPR") || c.equals("PKR")) {
             return "\u20A8";
-        } else if (c == "LYD") {
+        } else if (c.equals("LYD")) {
             return "\u062F.\u0644";
-        } else if (c == "MUR") {
+        } else if (c.equals("MUR")) {
             return "\u20B9";
-        } else if (c == "MYR") {
+        } else if (c.equals("MYR")) {
             return "RM";
-        } else if (c == "OMR") {
+        } else if (c.equals("OMR")) {
             return "\u0631.\u0639.";
-        } else if (c == "PHP") {
+        } else if (c.equals("PHP")) {
             return "\u20B1";
-        } else if (c == "PLN") {
+        } else if (c.equals("PLN")) {
             return "\u007A\u0142";
-        } else if (c == "QAR") {
+        } else if (c.equals("QAR")) {
             return "\u0631";
-        } else if (c == "RON") {
+        } else if (c.equals("RON")) {
             return "lei";
-        } else if (c == "RUB") {
+        } else if (c.equals("RUB")) {
             return "\u20BD";
-        } else if (c == "SAR") {
+        } else if (c.equals("SAR")) {
             return "\u0631.\u0633";
-        } else if (c == "THB") {
+        } else if (c.equals("THB")) {
             return "\u0E3F";
-        } else if (c == "TRY") {
+        } else if (c.equals("TRY")) {
             return "\u20BA";
-        } else if (c == "TWD") {
+        } else if (c.equals("TWD")) {
             return "NT$";
-        } else if (c == "VED") {
+        } else if (c.equals("VED")) {
             return "Bs. S.";
-        } else if (c == "ZAR") {
+        } else if (c.equals("ZAR")) {
             return "R";
         } else {
             return "$";
