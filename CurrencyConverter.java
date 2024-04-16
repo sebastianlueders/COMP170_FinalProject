@@ -53,7 +53,7 @@ public class CurrencyConverter {
                     continue;
                 } else if (exchangeType.equals("to USD")) {
                     conversionValue = mathConversionToUSD(baseCurrency);
-                    rateUpdated = promptForRateUpdate(baseCurrency, endCurrency, conversionValue);
+                    rateUpdated = promptForRateUpdate(baseCurrency, "USD", conversionValue);
                     if (rateUpdated) {
                         conversionValue = mathConversionToUSD(baseCurrency);
                     }
@@ -61,7 +61,7 @@ public class CurrencyConverter {
 
                 } else if (exchangeType.equals("from USD")) {
                     conversionValue = mathConversionFromUSD(endCurrency);
-                    rateUpdated = promptForRateUpdate(baseCurrency, endCurrency, conversionValue);
+                    rateUpdated = promptForRateUpdate("USD", endCurrency, conversionValue);
                     if (rateUpdated) {
                         conversionValue = mathConversionFromUSD(baseCurrency);
                     }
@@ -309,7 +309,95 @@ public class CurrencyConverter {
     }
 
     // Prompts user to verify that the current exchange rate is correct, then updates using updateExchangeRate if necessary. Returns whether update occurred.
-    public static boolean promptForRateUpdate(String base, String end, double currentConversionValue) {
+    public static boolean promptForRateUpdate(String base, String end, double currentConversionValue) throws FileNotFoundException {
+
+        String dateUpdated = "";
+        int relevantLineNumber;
+        String currencyToUpdate;
+        boolean rateInversionNeeded;
+        boolean rateUpdated = false;
+
+        if (base.equals("USD")) {
+            relevantLineNumber = getLine(end);
+            currencyToUpdate = end;
+            rateInversionNeeded = false;
+        } else {
+            relevantLineNumber = getLine(base);
+            currencyToUpdate = base;
+            rateInversionNeeded = true;
+        }
+
+        Scanner exrate = new Scanner(new File("exrate.txt"));
+
+        for (int i = 1; i <= relevantLineNumber; i++) {
+            exrate.nextLine();
+        }
+
+        String relevantLine = exrate.nextLine();
+
+        Scanner lineParser = new Scanner(relevantLine);
+
+        lineParser.next();
+        lineParser.next();
+
+        dateUpdated = lineParser.next();
+
+        boolean updateConfirmed = false;
+
+        while (!updateConfirmed) {
+
+            System.out.println("The conversion rate we currently have on file for " + base + "/" + end + " is: " + currentConversionValue);
+            System.out.println("It was last updated: " + dateUpdated);
+
+            System.out.print("Would you like to update this rate? (yes/no): ");
+
+            Scanner keyboard = new Scanner(System.in);
+
+            String updateRequest = keyboard.next();
+
+            while (!updateRequest.equals("yes") && !updateRequest.equals("no")) {
+                System.out.print("Would you like to update this rate? Enter yes or no: ");
+                updateRequest = keyboard.next();
+            }
+
+            if (updateRequest.equals("yes")) {
+                System.out.print("Please input an updated exchange rate for " + base + "/" + end + ": ");
+                double userUpdatedRate;
+                while (!keyboard.hasNextDouble()) {
+                    keyboard.nextLine();
+                    System.out.print("Please input a numerical value for the updated exchange rate: ");
+                }
+                userUpdatedRate = keyboard.nextDouble();
+                System.out.println("Please confirm that you want to update the exchange rate for " + base + "/" + end + " to " + userUpdatedRate);
+                System.out.print("Is this correct? (yes/no): ");
+                String answer = keyboard.next();
+                while (!answer.equals("yes") || !answer.equals("no")) {
+                    System.out.println("Please confirm that you want to update the exchange rate for " + base + "/" + end + " to " + userUpdatedRate);
+                    System.out.print("Is this correct? (yes/no): ");
+                    answer = keyboard.next();
+                }
+
+                if (answer.equals("yes")) {
+                    updateConfirmed = true;
+                    
+                    if (rateInversionNeeded) {
+                        userUpdatedRate = 1 / userUpdatedRate;
+                    }
+
+                    updateExchangeRate(currencyToUpdate, userUpdatedRate);
+                    rateUpdated = true;
+                } else {
+                    updateConfirmed = false;
+                    System.out.println("Please try again.");
+                }
+
+            } else {
+                updateConfirmed = true;
+            }
+
+        }
+
+        return rateUpdated;
 
     }
 
