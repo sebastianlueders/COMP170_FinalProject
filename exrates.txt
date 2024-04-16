@@ -1,4 +1,3 @@
-// 1st token: X (currency)  2nd token: USD/X exchange rate  3rd token: Last Update      **** DELETE BEFORE RUNNING PROGRRAM ****
 AED 3.672500 2024-04-03
 ARS 857.545968 2024-04-03
 AUD 1.522764 2024-04-03

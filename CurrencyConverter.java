@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 
@@ -116,8 +117,43 @@ public class CurrencyConverter {
 
 
     // Prompts & returns the base currency that the user wants to use for their transaction quote
-    public static String getBaseCurrency() {
+    public static String getBaseCurrency() throws FileNotFoundException {
+        boolean match = false;
+        String base = "";
 
+        while (!match) {
+        
+            System.out.println("What currency are you wanting to exchange today?");
+            System.out.print("Please enter the 3-letter ISO code for the currency you are currently holding: ");
+            Scanner keyboard = new Scanner(System.in);
+            System.out.println();
+            base = keyboard.next();
+            while (base.length() != 3 || !Character.isLetter(base.charAt(0)) || !Character.isLetter(base.charAt(1)) || !Character.isLetter(base.charAt(2))) {
+                System.out.print("Please enter a 3-letter ISO code: ");
+                base = keyboard.next();
+            }
+
+            base.toUpperCase();
+
+            Scanner exrates = new Scanner(new File("exrates.txt"));
+
+            while (exrates.hasNextLine() && !match) {
+                
+                String iso = exrates.next();
+
+                if (iso.equals(base)) {
+                    match = true;
+                } else {
+                    exrates.nextLine();
+                }
+            }
+
+            if (!match) {
+                System.out.println("The ISO code you entered could not be found in our list of supported currencies. Please try again.");
+            }
+        }
+
+        return base;
     }
 
     // Prompts & returns the base currency that the user wants to use for their transaction quote
