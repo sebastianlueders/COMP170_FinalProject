@@ -56,7 +56,7 @@ public class CurrencyConverter {
                     if (rateUpdated) {
                         conversionValue = mathConversionToUSD(baseCurrency);
                     }
-                    endCurrencyFairValue = baseAmount * finalConversionRate;
+                    endCurrencyFairValue = baseAmount * conversionValue;
 
                 } else if (exchangeType.equals("from USD")) {
                     conversionValue = mathConversionFromUSD(endCurrency);
@@ -64,7 +64,7 @@ public class CurrencyConverter {
                     if (rateUpdated) {
                         conversionValue = mathConversionFromUSD(baseCurrency);
                     }
-                    endCurrencyFairValue = baseAmount * finalConversionRate;
+                    endCurrencyFairValue = baseAmount * conversionValue;
 
                 } else {
                     conversionValueToUSD = mathConversionToUSD(baseCurrency);
