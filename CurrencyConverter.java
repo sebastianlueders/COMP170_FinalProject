@@ -7,7 +7,7 @@ import java.io.PrintStream;
 
 public class CurrencyConverter {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         
         boolean done = false;
         
@@ -24,7 +24,7 @@ public class CurrencyConverter {
                 String baseCurrency = getBaseCurrency();
                 String baseCurrencySymbol = currencySymbolFinder(baseCurrency);
                 System.out.println();
-                String endCurrency = getEndCurrency();
+                String endCurrency = getEndCurrency(baseCurrency);
                 String endCurrencySymbol = currencySymbolFinder(endCurrency);
                 System.out.println();
                 double baseAmount = getAmount(baseCurrency, endCurrency);
@@ -157,7 +157,43 @@ public class CurrencyConverter {
     }
 
     // Prompts & returns the base currency that the user wants to use for their transaction quote
-    public static String getEndCurrency() {
+    public static String getEndCurrency(String base) throws FileNotFoundException {
+        boolean match = false;
+        String end = "";
+
+        while (!match) {
+        
+            System.out.println("What currency do you want in exchange for " + base + "?");
+            System.out.print("Please enter the 3-letter ISO code for the currency you are looking to exchange to: ");
+            Scanner keyboard = new Scanner(System.in);
+            System.out.println();
+            end = keyboard.next();
+            while (end.length() != 3 || !Character.isLetter(end.charAt(0)) || !Character.isLetter(end.charAt(1)) || !Character.isLetter(end.charAt(2))) {
+                System.out.print("Please enter a 3-letter ISO code: ");
+                end = keyboard.next();
+            }
+
+            end.toUpperCase();
+
+            Scanner exrates = new Scanner(new File("exrates.txt"));
+
+            while (exrates.hasNextLine() && !match) {
+                
+                String iso = exrates.next();
+
+                if (iso.equals(end)) {
+                    match = true;
+                } else {
+                    exrates.nextLine();
+                }
+            }
+
+            if (!match) {
+                System.out.println("The ISO code you entered could not be found in our list of supported currencies. Please try again.");
+            }
+        }
+
+        return end;
 
     }
 
