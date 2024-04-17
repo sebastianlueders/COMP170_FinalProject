@@ -421,7 +421,7 @@ public class CurrencyConverter {
     public static void updateExchangeRate(String currencyISO, double updatedRate) throws FileNotFoundException {
         Scanner exrates = new Scanner(new File("exrates.txt"));
         
-        int lineNumber = getLine(currencySymbol);
+        int lineNumber = getLine(currencyISO);
 
         // Creates new file named updatedexrates.txt
         PrintStream output = new PrintStream(new File("updatedexrates.txt"));
