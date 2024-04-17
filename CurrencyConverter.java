@@ -82,7 +82,7 @@ public class CurrencyConverter {
 
                 }
 
-                printFinalResults(baseCurrencySymbol, baseAmount, endCurrency, endCurrencySymbol, endCurrencyFairValue);
+                done = printFinalResults(baseCurrencySymbol, baseAmount, endCurrency, endCurrencySymbol, endCurrencyFairValue);
 
             }
 
@@ -329,7 +329,6 @@ public class CurrencyConverter {
 
         Scanner exrate = new Scanner(new File("exrate.txt"));
 
-
         for (int i = 1; i <= relevantLineNumber; i++) {
             exrate.nextLine();
         }
@@ -405,97 +404,46 @@ public class CurrencyConverter {
     // Prompts user to verify that the current exchange rate for both transactions is correct, then updates using updateExchangeRate if necessary. Returns whether update occurred.
     public static boolean promptForMultipleRateUpdate(String base, String end, double baseToUSDRate, double USDToEndRate) {
         Scanner keyboard = new Scanner(System.in);
+        System.out.println("The exchange rate that we have on file for " + base + "/" + end + " is: " + baseToUSDRate * USDToEndRate);
+        System.out.println("We convert through USD. Would you like to convert the " + base + "/" + "USD rate and the USD/" + end + " rate?");
+        System.out.print("Type yes/no: ");
+        String answer = keyboard.next();
         boolean baseRateUpdate;
         boolean endRateUpdate;
 
+        while(!answer.equals("yes") && !answer.equals("no")) {
+            System.out.println("Your input is not an option. Please type yes or no: ");
+            answer = keyboard.next();
+        } 
+
+        if(answer.equals("no")) {
+            return false
+        } else {
+            System.out.println("The " + base + "/USD rate is: " + baseToUSDRate);
+            System.out.print("Would you like to change this rate? (yes/no): ");
+        }
+
+
+
         baseRateUpdate = promptForRateUpdate(base, end, baseToUSDRate);
-        System.out.println("We have updated the " + base " to " + end);
+        //if statement (if baserateupdated is true then println statement)
+        if()
+        System.out.println("We have updated the conversion rate " + base " to " + end);
         
         endRateUpdate = promptForRateUpdate(end, base, USDToEndRate);
-        System.out.println("We have updated the " + end " to " + base);
+        //if statement 
+        System.out.println("We have updated the conversion rate " + end " to " + base);
 
-        
+
+        return baseRateUpdate
+        return endRateUpdate
+
     }
 
     // Updates the exchange rate with new exchange rate provided by the user
-    public static void updateExchangeRate(String currencyISO, double updatedRate) throws FileNotFoundException {
-        Scanner exrates = new Scanner(new File("exrates.txt"));
-        
-        int lineNumber = getLine(currencyISO);
+    public static void updateExchangeRate(String currencySymbol, double updatedRate) {
 
-        // Creates new file named updatedexrates.txt
-        PrintStream output = new PrintStream(new File("updatedexrates.txt"));
 
-        Scanner keyboard = new Scanner(System.in);
-
-        if (lineNumber == 0) {
-            String relevantLine = exrates.nextLine();
-            Scanner lineParser = new Scanner(relevantLine);
-            String ticker = lineParser.next();
-            output.print(ticker + " ");
-            output.print(updatedRate + " ");
-            System.out.println("Please input today's date in the following format 01-01-2025");
-            System.out.print("Input date here: ");
-            String date = keyboard.next();
-            while (date.length() != 10 || !(Character.isDigit(date.charAt(0))) || !(Character.isDigit(date.charAt(1))) || !(date.charAt(2) != '-') || 
-            !(Character.isDigit(date.charAt(3))) || !(Character.isDigit(date.charAt(4))) || !(date.charAt(5) != '-') || !(Character.isDigit(date.charAt(6))) ||
-            !(Character.isDigit(date.charAt(7))) || !(Character.isDigit(date.charAt(8))) || !(Character.isDigit(date.charAt(9)))) {
-                System.out.print("Incorrect format. Please input date with '11-11-1111' format: ");
-                date = keyboard.next();
-            }
-
-            output.println(date);
-
-            while (exrates.hasNextLine()) {
-                relevantLine = exrates.nextLine();
-                output.println(relevantLine);
-            }
-
-            Scanner updatedExRates = new Scanner(new File("updatedexrates.txt"));
-            PrintStream finalOutput = new PrintStream(new File("exrates.txt"));
-
-            while (updatedExRates.hasNextLine()) {
-                relevantLine = updatedExRates.nextLine();
-                finalOutput.println(relevantLine);
-            }
-            
-        } else {
-            for (int i = 1; i <= lineNumber; i++) {
-                String relevantLine = exrates.nextLine();
-                output.println(relevantLine);
-            }
-
-            String relevantLine = exrates.nextLine();
-            Scanner lineParser = new Scanner(relevantLine);
-            String ticker = lineParser.next();
-            output.print(ticker + " ");
-            output.print(updatedRate + " ");
-            System.out.println("Please input today's date in the following format 01-01-2025");
-            System.out.print("Input date here: ");
-            String date = keyboard.next();
-            while (date.length() != 10 || !(Character.isDigit(date.charAt(0))) || !(Character.isDigit(date.charAt(1))) || !(date.charAt(2) != '-') || 
-            !(Character.isDigit(date.charAt(3))) || !(Character.isDigit(date.charAt(4))) || !(date.charAt(5) != '-') || !(Character.isDigit(date.charAt(6))) ||
-            !(Character.isDigit(date.charAt(7))) || !(Character.isDigit(date.charAt(8))) || !(Character.isDigit(date.charAt(9)))) {
-                System.out.print("Incorrect format. Please input date with '11-11-1111' format: ");
-                date = keyboard.next();
-            }
-
-            output.println(date);
-
-            while (exrates.hasNextLine()) {
-                relevantLine = exrates.nextLine();
-                output.println(relevantLine);
-            }
-
-            Scanner updatedExRates = new Scanner(new File("updatedexrates.txt"));
-            PrintStream finalOutput = new PrintStream(new File("exrates.txt"));
-
-            while (updatedExRates.hasNextLine()) {
-                relevantLine = updatedExRates.nextLine();
-                finalOutput.println(relevantLine);
-            }
-
-        }
     }
 
     // Finds & returns the unicode value of the passed currency's symbol for use in printing
@@ -579,19 +527,31 @@ public class CurrencyConverter {
     }
 
     // Using all of the variables needed, creates a print statement that summarizes the transaction quote & fair value (should state that fees are variable based on broker, would be good to get a range)
-    public static void printFinalResults(String baseSymbol, double baseAmount, String endCurrency, String endCurrencySymbol, double endCurrencyFairValue) {
-
+    public static boolean printFinalResults(String baseSymbol, double baseAmount, String endCurrency, String endCurrencySymbol, double endCurrencyFairValue) {
         Scanner keyboard = new Scanner(System.in); 
         System.out.println("Summarizing this transaction: we have converted from " + baseSymbol + " to " + endCurrencySymbol + endCurrency);
         System.out.println("The amount that you received is: " + endCurrencyFairValue);
         System.out.println("The added fees on your transaction are based on the broker and are constantly changing.");
-        System.out.println("If you are satisfied with your transaction, please type 'quit' and press Enter.");
+        System.out.println("Do you want to make another transaction?");
+
 
         String input = keyboard.next(); 
-        if (input.equals("quit")) {
-            System.out.println("Transaction has been completed.");
-        } else {
-            System.out.println("The correct input was not provided. Please try again.");
+        while(!input.equals("yes") && !input.equals("no")) {
+            System.out.println("Your input is not an option. Please type yes or no: ");
+            input = keyboard.next();
+        } 
+
+        boolean done = false;
+        if (input.equals("no")) {
+            System.out.println("Goodbye.");
+            done = true;
+
         }
+
+        return done;
+
+
+
+
     }
 }
