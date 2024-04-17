@@ -29,8 +29,8 @@ public class CurrencyConverter {
                 System.out.println();
                 double baseAmount = getAmount(baseCurrency, endCurrency);
                 System.out.println();
-
-
+                System.out.println("Testing git push")
+                System.out.println("Mohammad Qazi")
                 
                 
 
@@ -403,7 +403,7 @@ public class CurrencyConverter {
 
     // Prompts user to verify that the current exchange rate for both transactions is correct, then updates using updateExchangeRate if necessary. Returns whether update occurred.
     public static boolean promptForMultipleRateUpdate(String base, String end, double baseToUSDRate, double USDToEndRate) {
-
+        
     }
 
     // Updates the exchange rate with new exchange rate provided by the user
