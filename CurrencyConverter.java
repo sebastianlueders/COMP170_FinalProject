@@ -329,6 +329,7 @@ public class CurrencyConverter {
 
         Scanner exrate = new Scanner(new File("exrate.txt"));
 
+
         for (int i = 1; i <= relevantLineNumber; i++) {
             exrate.nextLine();
         }
@@ -417,9 +418,84 @@ public class CurrencyConverter {
     }
 
     // Updates the exchange rate with new exchange rate provided by the user
-    public static void updateExchangeRate(String currencySymbol, double updatedRate) {
+    public static void updateExchangeRate(String currencyISO, double updatedRate) throws FileNotFoundException {
+        Scanner exrates = new Scanner(new File("exrates.txt"));
+        
+        int lineNumber = getLine(currencySymbol);
 
+        // Creates new file named updatedexrates.txt
+        PrintStream output = new PrintStream(new File("updatedexrates.txt"));
 
+        Scanner keyboard = new Scanner(System.in);
+
+        if (lineNumber == 0) {
+            String relevantLine = exrates.nextLine();
+            Scanner lineParser = new Scanner(relevantLine);
+            String ticker = lineParser.next();
+            output.print(ticker + " ");
+            output.print(updatedRate + " ");
+            System.out.println("Please input today's date in the following format 01-01-2025");
+            System.out.print("Input date here: ");
+            String date = keyboard.next();
+            while (date.length() != 10 || !(Character.isDigit(date.charAt(0))) || !(Character.isDigit(date.charAt(1))) || !(date.charAt(2) != '-') || 
+            !(Character.isDigit(date.charAt(3))) || !(Character.isDigit(date.charAt(4))) || !(date.charAt(5) != '-') || !(Character.isDigit(date.charAt(6))) ||
+            !(Character.isDigit(date.charAt(7))) || !(Character.isDigit(date.charAt(8))) || !(Character.isDigit(date.charAt(9)))) {
+                System.out.print("Incorrect format. Please input date with '11-11-1111' format: ");
+                date = keyboard.next();
+            }
+
+            output.println(date);
+
+            while (exrates.hasNextLine()) {
+                relevantLine = exrates.nextLine();
+                output.println(relevantLine);
+            }
+
+            Scanner updatedExRates = new Scanner(new File("updatedexrates.txt"));
+            PrintStream finalOutput = new PrintStream(new File("exrates.txt"));
+
+            while (updatedExRates.hasNextLine()) {
+                relevantLine = updatedExRates.nextLine();
+                finalOutput.println(relevantLine);
+            }
+            
+        } else {
+            for (int i = 1; i <= lineNumber; i++) {
+                String relevantLine = exrates.nextLine();
+                output.println(relevantLine);
+            }
+
+            String relevantLine = exrates.nextLine();
+            Scanner lineParser = new Scanner(relevantLine);
+            String ticker = lineParser.next();
+            output.print(ticker + " ");
+            output.print(updatedRate + " ");
+            System.out.println("Please input today's date in the following format 01-01-2025");
+            System.out.print("Input date here: ");
+            String date = keyboard.next();
+            while (date.length() != 10 || !(Character.isDigit(date.charAt(0))) || !(Character.isDigit(date.charAt(1))) || !(date.charAt(2) != '-') || 
+            !(Character.isDigit(date.charAt(3))) || !(Character.isDigit(date.charAt(4))) || !(date.charAt(5) != '-') || !(Character.isDigit(date.charAt(6))) ||
+            !(Character.isDigit(date.charAt(7))) || !(Character.isDigit(date.charAt(8))) || !(Character.isDigit(date.charAt(9)))) {
+                System.out.print("Incorrect format. Please input date with '11-11-1111' format: ");
+                date = keyboard.next();
+            }
+
+            output.println(date);
+
+            while (exrates.hasNextLine()) {
+                relevantLine = exrates.nextLine();
+                output.println(relevantLine);
+            }
+
+            Scanner updatedExRates = new Scanner(new File("updatedexrates.txt"));
+            PrintStream finalOutput = new PrintStream(new File("exrates.txt"));
+
+            while (updatedExRates.hasNextLine()) {
+                relevantLine = updatedExRates.nextLine();
+                finalOutput.println(relevantLine);
+            }
+
+        }
     }
 
     // Finds & returns the unicode value of the passed currency's symbol for use in printing
