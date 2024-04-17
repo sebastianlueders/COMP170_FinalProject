@@ -403,11 +403,22 @@ public class CurrencyConverter {
 
     // Prompts user to verify that the current exchange rate for both transactions is correct, then updates using updateExchangeRate if necessary. Returns whether update occurred.
     public static boolean promptForMultipleRateUpdate(String base, String end, double baseToUSDRate, double USDToEndRate) {
+        Scanner keyboard = new Scanner(System.in);
+        boolean baseRateUpdate;
+        boolean endRateUpdate;
+
+        baseRateUpdate = promptForRateUpdate(base, end, baseToUSDRate);
+        System.out.println("We have updated the " + base " to " + end);
+        
+        endRateUpdate = promptForRateUpdate(end, base, USDToEndRate);
+        System.out.println("We have updated the " + end " to " + base);
+
         
     }
 
     // Updates the exchange rate with new exchange rate provided by the user
     public static void updateExchangeRate(String currencySymbol, double updatedRate) {
+
 
     }
 
