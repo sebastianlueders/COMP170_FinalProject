@@ -580,7 +580,7 @@ public class CurrencyConverter {
 
     // Using all of the variables needed, creates a print statement that summarizes the transaction quote & fair value (should state that fees are variable based on broker, would be good to get a range)
     public static void printFinalResults(String baseSymbol, double baseAmount, String endCurrency, String endCurrencySymbol, double endCurrencyFairValue) {
-        public static void printFinalResults(String baseSymbol, double baseAmount, String endCurrency, String endCurrencySymbol, double endCurrencyFairValue) {
+
         Scanner keyboard = new Scanner(System.in); 
         System.out.println("Summarizing this transaction: we have converted from " + baseSymbol + " to " + endCurrencySymbol + endCurrency);
         System.out.println("The amount that you received is: " + endCurrencyFairValue);
@@ -594,5 +594,4 @@ public class CurrencyConverter {
             System.out.println("The correct input was not provided. Please try again.");
         }
     }
-}
 }
