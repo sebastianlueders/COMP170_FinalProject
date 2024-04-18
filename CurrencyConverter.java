@@ -37,6 +37,8 @@ public class CurrencyConverter {
                 String exchangeType = exchangeType(baseCurrency, endCurrency);
 
 
+                // The following could be put into a getEndCurrencyFairValue method
+
                 double conversionValue;
                 double conversionValueToUSD;
                 double conversionValueFromUSD;
@@ -601,9 +603,13 @@ public class CurrencyConverter {
     // Using all of the variables needed, creates a print statement that summarizes the transaction quote & fair value (should state that fees are variable based on broker, would be good to get a range)
     public static boolean printFinalResults(String baseSymbol, double baseAmount, String endCurrency, String endCurrencySymbol, double endCurrencyFairValue) {
         Scanner keyboard = new Scanner(System.in); 
-        System.out.println("Summarizing this transaction: we have converted from " + baseSymbol + " to " + endCurrencySymbol + endCurrency);
-        System.out.println("The amount that you received is: " + endCurrencyFairValue);
-        System.out.println("The added fees on your transaction are based on the broker and are constantly changing.");
+        
+        System.out.println();
+        System.out.println();
+        System.out.printf("The fair market value of converting %s%.2f to %s is: %s%.2f \n", baseSymbol, baseAmount, endCurrency, endCurrencySymbol, endCurrencyFairValue);
+        double finalValueWithFees = 0.9945 * endCurrencyFairValue;
+        System.out.printf("Considering an average exchange fee of 0.55%%, the minimum fair quote after fees is: %s%.2f \n", endCurrencySymbol, finalValueWithFees);
+        System.out.println();
         System.out.println("Do you want to make another transaction?");
 
 
