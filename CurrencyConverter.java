@@ -37,14 +37,18 @@ public class CurrencyConverter {
                 String exchangeType = exchangeType(baseCurrency, endCurrency);
 
 
-                // The following could be put into a getEndCurrencyFairValue method
+                // The following could be put into a getEndCurrencyFairValue method w/ header:
+                // public static double getEndCurrencyFairValue(String exchangeType, String baseCurrency, String endCurrency) returns endCurrencyFairValue
 
+
+
+                boolean rateUpdated = false;
                 double conversionValue;
                 double conversionValueToUSD;
                 double conversionValueFromUSD;
                 double finalConversionRate;
                 double endCurrencyFairValue;
-                boolean rateUpdated = false;
+                
 
 
                 
@@ -174,7 +178,7 @@ public class CurrencyConverter {
                 end = keyboard.next();
             }
 
-            end.toUpperCase();
+            end = end.toUpperCase();
 
             Scanner exrates = new Scanner(new File("exrates.txt"));
 
@@ -182,7 +186,7 @@ public class CurrencyConverter {
                 
                 String iso = exrates.next();
 
-                if (iso.equals(end) || base.equals("USD")) {
+                if (iso.equals(end) || end.equals("USD")) {
                     match = true;
                 } else {
                     exrates.nextLine();
