@@ -60,7 +60,9 @@ public class CurrencyConverter {
                     conversionValue = mathConversionToUSD(baseCurrency);
                     rateUpdated = promptForRateUpdate(baseCurrency, "USD", conversionValue);
                     if (rateUpdated) {
+                        
                         conversionValue = mathConversionToUSD(baseCurrency);
+                        
                     }
                     endCurrencyFairValue = baseAmount * conversionValue;
 
@@ -68,7 +70,7 @@ public class CurrencyConverter {
                     conversionValue = mathConversionFromUSD(endCurrency);
                     rateUpdated = promptForRateUpdate("USD", endCurrency, conversionValue);
                     if (rateUpdated) {
-                        conversionValue = mathConversionFromUSD(baseCurrency);
+                        conversionValue = mathConversionFromUSD(endCurrency);
                     }
                     endCurrencyFairValue = baseAmount * conversionValue;
 
@@ -105,6 +107,7 @@ public class CurrencyConverter {
 
     // Prompt user to either make a currency conversion estimate or quit the program. Returns int value representing their answer.
     public static String promptForAction() {
+        System.out.println();
         System.out.print("Enter 'convert' to get a conversion estimate or 'quit' to quit the app: ");
 
         Scanner keyboard = new Scanner(System.in);
@@ -171,7 +174,6 @@ public class CurrencyConverter {
             System.out.println("What currency do you want in exchange for " + base + "?");
             System.out.print("Please enter the 3-letter ISO code for the currency you are looking to exchange to: ");
             Scanner keyboard = new Scanner(System.in);
-            System.out.println();
             end = keyboard.next();
             while (end.length() != 3 || !Character.isLetter(end.charAt(0)) || !Character.isLetter(end.charAt(1)) || !Character.isLetter(end.charAt(2))) {
                 System.out.print("Please enter a 3-letter ISO code: ");
@@ -248,6 +250,7 @@ public class CurrencyConverter {
 
     // Returns line number of ISO passed
     public static int getLine(String iso) throws FileNotFoundException {
+        
         Scanner exrates = new Scanner(new File("exrates.txt"));
         boolean match = false;
         String candidate;
@@ -264,7 +267,7 @@ public class CurrencyConverter {
                 lineCounter++;
             }
         }
-
+        
         return lineCounter;
     }
 
@@ -421,18 +424,22 @@ public class CurrencyConverter {
             answer = keyboard.next();
         } 
 
+        System.out.println();
+
         if(answer.equals("no")) {
             return false;
         } else {
-            System.out.println("The " + base + "/USD rate is: " + baseToUSDRate);
-            System.out.print("Would you like to change this rate? (yes/no): ");
-            answer = keyboard.nextLine();
+            //System.out.println();
+            //System.out.println("The " + base + "/USD rate is: " + baseToUSDRate);
+            //System.out.print("Would you like to change this rate? (yes/no): ");
+            //answer = keyboard.next();
             while(!answer.equals("yes") && !answer.equals("no")) {
                 System.out.println("Your input is not an option. Please type yes or no: ");
                 answer = keyboard.next();
             } 
             if (answer.equals("yes")) {
                 baseRateUpdate = promptForRateUpdate(base, "USD", baseToUSDRate);
+                System.out.println();
                 endRateUpdate = promptForRateUpdate("USD", end, USDToEndRate);
             }
 
@@ -468,6 +475,7 @@ public class CurrencyConverter {
                 System.out.print("Incorrect format. Please input date with 'YYYY-MM-DD' format: ");
                 date = keyboard.next();
             }
+            System.out.println();
 
             output.println(date);
 
