@@ -610,7 +610,7 @@ public class CurrencyConverter {
         double finalValueWithFees = 0.9945 * endCurrencyFairValue;
         System.out.printf("Considering an average exchange fee of 0.55%%, the minimum fair quote after fees is: %s%.2f \n", endCurrencySymbol, finalValueWithFees);
         System.out.println();
-        System.out.println("Do you want to make another transaction?");
+        System.out.println("Do you want to make another transaction? (yes/no)");
 
 
         String input = keyboard.next(); 
