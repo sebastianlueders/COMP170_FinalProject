@@ -3,7 +3,7 @@
 
 # Currency Exchange Program
 
-##**Description:**
+ **Description:**
 
 This program is used to obtain a fair value quote on a currency swap two different currencies. By default, this program supports:
 
@@ -72,7 +72,7 @@ This program is used to obtain a fair value quote on a currency swap two differe
 
 Since exchange rates are stored locally in this program, users must update the exchange rates manually. This can be done through the terminal or manually by editing the exrates document.
 
-##**Pseudocode:**
+ **Pseudocode:**
 
  * Welcome user through console messaging
  * Prompt user for base currency
