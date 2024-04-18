@@ -5,7 +5,7 @@
 
  **Description:**
 
-This program is used to obtain a fair value quote on a currency swap two different currencies. By default, this program supports:
+This program is used to obtain a fair value quote on a currency swap between two different currencies. By default, this program supports:
 
 * United Arab Emirates Dirham (AED) 
 * Cardano (ADA)
