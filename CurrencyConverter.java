@@ -125,7 +125,6 @@ public class CurrencyConverter {
             System.out.println("What currency are you wanting to exchange today?");
             System.out.print("Please enter the 3-letter ISO code for the currency you are currently holding: ");
             Scanner keyboard = new Scanner(System.in);
-            System.out.println();
             base = keyboard.next();
             // I think we should use a if/else statement here
             while (base.length() != 3 || !Character.isLetter(base.charAt(0)) || !Character.isLetter(base.charAt(1)) || !Character.isLetter(base.charAt(2))) {
@@ -141,7 +140,7 @@ public class CurrencyConverter {
                 
                 String iso = exrates.next();
 
-                if (iso.equals(base)) {
+                if (iso.equals(base) || base.equals("USD")) {
                     match = true;
                 } else {
                     exrates.nextLine();
@@ -181,7 +180,7 @@ public class CurrencyConverter {
                 
                 String iso = exrates.next();
 
-                if (iso.equals(end)) {
+                if (iso.equals(end) || base.equals("USD")) {
                     match = true;
                 } else {
                     exrates.nextLine();
@@ -215,7 +214,7 @@ public class CurrencyConverter {
             amount = keyboard.nextDouble();
 
             if (amount <= 0) {
-                System.out.println("Sorry, we can't exchange this value. Please try again.")
+                System.out.println("Sorry, we can't exchange this value. Please try again.");
             } else {
                 validInput = true;
             }
@@ -327,7 +326,7 @@ public class CurrencyConverter {
             rateInversionNeeded = true;
         }
 
-        Scanner exrate = new Scanner(new File("exrate.txt"));
+        Scanner exrate = new Scanner(new File("exrates.txt"));
 
         for (int i = 1; i <= relevantLineNumber; i++) {
             exrate.nextLine();
@@ -371,7 +370,7 @@ public class CurrencyConverter {
                 System.out.println("Please confirm that you want to update the exchange rate for " + base + "/" + end + " to " + userUpdatedRate);
                 System.out.print("Is this correct? (yes/no): ");
                 String answer = keyboard.next();
-                while (!answer.equals("yes") || !answer.equals("no")) {
+                while (!answer.equals("yes") && !answer.equals("no")) {
                     System.out.println("Please confirm that you want to update the exchange rate for " + base + "/" + end + " to " + userUpdatedRate);
                     System.out.print("Is this correct? (yes/no): ");
                     answer = keyboard.next();
@@ -454,13 +453,13 @@ public class CurrencyConverter {
             String ticker = lineParser.next();
             output.print(ticker + " ");
             output.print(updatedRate + " ");
-            System.out.println("Please input today's date in the following format 01-01-2025");
+            System.out.println("Please input today's date in the following format YYYY-MM-DD");
             System.out.print("Input date here: ");
             String date = keyboard.next();
-            while (date.length() != 10 || !(Character.isDigit(date.charAt(0))) || !(Character.isDigit(date.charAt(1))) || !(date.charAt(2) != '-') || 
-            !(Character.isDigit(date.charAt(3))) || !(Character.isDigit(date.charAt(4))) || !(date.charAt(5) != '-') || !(Character.isDigit(date.charAt(6))) ||
-            !(Character.isDigit(date.charAt(7))) || !(Character.isDigit(date.charAt(8))) || !(Character.isDigit(date.charAt(9)))) {
-                System.out.print("Incorrect format. Please input date with '11-11-1111' format: ");
+            while (date.length() != 10 || !(Character.isDigit(date.charAt(0))) || !(Character.isDigit(date.charAt(1))) || date.charAt(4) != '-' || 
+            !(Character.isDigit(date.charAt(2))) || !(Character.isDigit(date.charAt(3))) || date.charAt(7) != '-' || !(Character.isDigit(date.charAt(5))) ||
+            !(Character.isDigit(date.charAt(6))) || !(Character.isDigit(date.charAt(8))) || !(Character.isDigit(date.charAt(9)))) {
+                System.out.print("Incorrect format. Please input date with 'YYYY-MM-DD' format: ");
                 date = keyboard.next();
             }
 
@@ -490,13 +489,13 @@ public class CurrencyConverter {
             String ticker = lineParser.next();
             output.print(ticker + " ");
             output.print(updatedRate + " ");
-            System.out.println("Please input today's date in the following format 01-01-2025");
+            System.out.println("Please input today's date in the following format YYYY-MM-DD");
             System.out.print("Input date here: ");
             String date = keyboard.next();
-            while (date.length() != 10 || !(Character.isDigit(date.charAt(0))) || !(Character.isDigit(date.charAt(1))) || !(date.charAt(2) != '-') || 
-            !(Character.isDigit(date.charAt(3))) || !(Character.isDigit(date.charAt(4))) || !(date.charAt(5) != '-') || !(Character.isDigit(date.charAt(6))) ||
-            !(Character.isDigit(date.charAt(7))) || !(Character.isDigit(date.charAt(8))) || !(Character.isDigit(date.charAt(9)))) {
-                System.out.print("Incorrect format. Please input date with '11-11-1111' format: ");
+            while (date.length() != 10 || !(Character.isDigit(date.charAt(0))) || !(Character.isDigit(date.charAt(1))) || date.charAt(4) != '-' || 
+            !(Character.isDigit(date.charAt(2))) || !(Character.isDigit(date.charAt(3))) || date.charAt(7) != '-' || !(Character.isDigit(date.charAt(5))) ||
+            !(Character.isDigit(date.charAt(6))) || !(Character.isDigit(date.charAt(8))) || !(Character.isDigit(date.charAt(9)))) {
+                System.out.print("Incorrect format. Please input date with 'YYYY-MM-DD' format: ");
                 date = keyboard.next();
             }
 
